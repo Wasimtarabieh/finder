@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Course Finder is a web application that helps users find training and educational courses easily.">
+    <meta name="keywords" content="course finder, educational courses, training, professional development, online learning">
+    <meta name="author" content="Your Name">
+    <title>Course Finder</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="lang.js"></script>
+    <script defer src="auth.js"></script>
+    <script defer src="data.js"></script>
+    <script defer src="scripts.js"></script>
+    <script defer src="chatbot.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home" data-lang="home">בית</a></li>
+                <li><a href="#courses" data-lang="upcoming-courses">קורסים קרובים</a></li>
+                <li><a href="#profile" data-lang="profile">פרופיל</a></li>
+                <li><a href="#notifications" data-lang="notifications">התראות</a></li>
+            </ul>
+        </nav>
+        <h1 data-lang="title">חיפוש קורס</h1>
+        <div id="language-container">
+            <select id="language-select">
+                <option value="ar">العربية</option>
+                <option value="he">עברית</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+        <div id="login-container">
+            <button id="login-button" data-lang="login">התחברות</button>
+            <button id="signup-button" data-lang="signup">הרשמה</button>
+            <button id="logout-button" data-lang="logout" style="display: none;">התנתקות</button>
+        </div>
+    </header>
+    <main>
+        <section id="hero">
+            <h2 data-lang="find-course">מצא את הקורס המתאים עבורך</h2>
+            <p data-lang="hero-text">גלה מגוון רחב של קורסים המותאמים לצרכים ולמטרות שלך. קבל המלצות מותאמות אישית והתחל ללמוד היום!</p>
+            <form id="quiz-form">
+                <!-- Interactive Questions will be generated here -->
+            </form>
+            <input type="text" id="search-bar" placeholder="חפש קורסים..." onkeyup="searchCourses()">
+        </section>
+        <section id="calendar">
+            <h2 data-lang="upcoming-courses">קורסים קרובים</h2>
+            <div id="course-calendar">
+                <!-- Course calendar will be displayed here -->
+            </div>
+        </section>
+        <section id="course-details">
+            <h2 data-lang="course-details">פרטי הקורס</h2>
+            <div id="course-info">
+                <!-- Course details will be displayed here -->
+            </div>
+        </section>
+        <section id="profile" style="display: none;">
+            <h2>פרופיל</h2>
+            <div id="profile-info">
+                <p><strong>שם משתמש:</strong> <span id="profile-username"></span></p>
+                <p><strong>דואר אלקטרוני:</strong> <span id="profile-email"></span></p>
+                <h3>עדכון פרטים אישיים</h3>
+                <form id="update-profile-form">
+                    <label for="update-username">שם משתמש:</label>
+                    <input type="text" id="update-username" name="username" required>
+                    <label for="update-email">דואר אלקטרוני:</label>
+                    <input type="email" id="update-email" name="email" required>
+                    <button type="submit">עדכן פרטים</button>
+                </form>
+                <h3>שנה סיסמה</h3>
+                <form id="change-password-form">
+                    <label for="current-password">סיסמה נוכחית:</label>
+                    <input type="password" id="current-password" name="current-password" required>
+                    <label for="new-password">סיסמה חדשה:</label>
+                    <input type="password" id="new-password" name="new-password" required>
+                    <button type="submit">שנה סיסמה</button>
+                </form>
+            </div>
+        </section>
+        <section id="notifications">
+            <h2>התראות</h2>
+            <ul id="notification-list">
+                <!-- Notifications will be listed here -->
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 <span data-lang="footer">חיפוש קורס. כל הזכויות שמורות.</span></p>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close close-login">&times;</span>
+            <form id="login-form">
+                <h2 data-lang="login">התחברות</h2>
+                <label for="login-username">שם משתמש:</label>
+                <input type="text" id="login-username" name="username" required>
+                <label for="login-password">סיסמה:</label>
+                <input type="password" id="login-password" name="password" required>
+                <button type="submit" data-lang="login">התחברות</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <span class="close close-signup">&times;</span>
+            <form id="signup-form">
+                <h2 data-lang="signup">הרשמה</h2>
+                <label for="signup-username">שם משתמש:</label>
+                <input type="text" id="signup-username" name="username" required>
+                <label for="signup-email">דואר אלקטרוני:</label>
+                <input type="email" id="signup-email" name="email" required>
+                <label for="signup-password">סיסמה:</label>
+                <input type="password" id="signup-password" name="password" required>
+                <button type="submit" data-lang="signup">הרשמה</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <video controls>
+                <source src="course-video.mp4" type="video/mp4">
+                הדפדפן שלך לא תומך בתג הוידאו.
+            </video>
+        </div>
+    </div>
+
+    <!-- Chatbot Modal -->
+    <div id="chatbot-modal" class="modal">
+        <div class="modal-content">
+            <span class="close close-chatbot">&times;</span>
+            <div id="chatbot-container">
+                <div id="chatbot-messages">
+                    <!-- Chatbot messages will be displayed here -->
+                </div>
+                <input type="text" id="chatbot-input" placeholder="הקלד הודעה..." required>
+                <button id="chatbot-send">שלח</button>
+            </div>
+        </div>
+    </div>
+    <button id="chatbot-toggle">צ'אט</button>
+</body>
+</html>
